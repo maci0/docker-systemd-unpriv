@@ -35,7 +35,7 @@ RUN systemctl unmask multi-user.target basic.target sysinit.target \
           systemd-logind.service systemd-journald.service \
           systemd-shutdownd.service systemd-shutdownd.socket \
           systemd-reboot.service systemd-halt.service \
-          console-getty.service sshd.service
+          console-getty.service sshd.service network.target
 RUN systemctl enable console-getty.service sshd.service
 
 # Remove OOMScoreAdjust from dbus.service and set LD_PRELOAD
