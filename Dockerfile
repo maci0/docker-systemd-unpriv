@@ -7,6 +7,8 @@ RUN yum -y install passwd openssh-server
 RUN yum clean all
 RUN echo root | passwd --stdin root
 RUN echo "UseDNS no" >> /etc/ssh/sshd_config
+RUN sed -i 's/UsePrivilegeSeparation sandbox/UsePrivilegeSeparation no/' /etc/ssh/sshd_config
+
 
 # Download library for fake libcap calls
 #RUN curl http://maci.satgnu.net/fakecap.so > /fakecap.so
