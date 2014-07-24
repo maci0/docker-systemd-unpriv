@@ -20,26 +20,17 @@ RUN yum -y remove gcc libcap-ng-devel cpp glibc-devel \
 RUN yum clean all
 
 
-# Disable and mask all systemd units
-RUN rm -Rf /etc/systemd/system/* 
-RUN for UNIT in `find /usr/lib/systemd/system -type f -printf '%P\n'`; \
-    do systemctl mask $UNIT;done
-
-# Get rid of stupid warning
-RUN systemctl mask display-manager.service
-
-# Re-enable needed systemd units
-RUN systemctl unmask multi-user.target basic.target sysinit.target \
-          halt.target shutdown.target umount.target final.target \
-          ctrl-alt-del.target getty.target dbus.service dbus.socket \
-          systemd-logind.service systemd-journald.service \
-          systemd-shutdownd.service systemd-shutdownd.socket \
-          systemd-reboot.service systemd-halt.service \
-          console-getty.service sshd.service network.target
-RUN systemctl enable console-getty.service sshd.service
+RUN systemctl mask dev-mqueue.mount dev-hugepages.mount \
+    systemd-remount-fs.service sys-kernel-config.mount \
+    sys-kernel-debug.mount sys-fs-fuse-connections.mount
+RUN systemctl mask display-manager.service 
+RUN systemctl disable graphical.target; systemctl enable multi-user.target
 
 # Remove OOMScoreAdjust from dbus.service and set LD_PRELOAD
 RUN sed 's/OOMScoreAdjust=-900/Environment="LD_PRELOAD=\/fakecap.so"/' \
  /usr/lib/systemd/system/dbus.service > /etc/systemd/system/dbus.service
+
+VOLUME ["/sys/fs/cgroup"]
+VOLUME ["/run"]
 
 CMD  ["/usr/lib/systemd/systemd"]
