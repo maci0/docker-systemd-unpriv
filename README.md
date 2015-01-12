@@ -4,8 +4,10 @@ docker-systemd-unpriv
 Docker files for an unprivileged systemd container
 
 This image is intended to be a base for other images.
-To build it simply execute ./build.sh
-To run a container simply execute ./run.sh
+
+To build it simply execute ```./build.sh```
+
+To run a container simply execute ```./run.sh``` 
 
 Example:
 
