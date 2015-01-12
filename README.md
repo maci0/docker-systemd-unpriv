@@ -1,7 +1,7 @@
 docker-systemd-unpriv
 =====================
 
-Docker files for an unprivileged systemd container
+Docker files for an unprivileged systemd container based on CentOS 7.
 
 This image is intended to be a base for other images.
 
@@ -66,3 +66,9 @@ root        24  0.3  0.0  11748  2792 ?        S    15:45   0:00 /bin/bash
 root        40  0.0  0.0  19756  2128 ?        R+   15:45   0:00 ps aux
 [root@07504197ba03 /]# 
 ```
+
+As an alternative you can get a pre-built container:
+```docker pull maci0/systemd```
+Or just run it using the default docker command (this should pull the image automatically):
+```docker run maci0/systemd```
+For more information see: https://registry.hub.docker.com/u/maci0/systemd/ or http://www.docker.com
