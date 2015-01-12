@@ -14,8 +14,10 @@ RUN systemctl disable graphical.target; systemctl enable multi-user.target
 
 ADD dbus.service /etc/systemd/system/dbus.service
 
-#RUN yum -y install passwd openssh-server initscripts; yum clean all
-RUN echo root | passwd --stdin root
+#RUN yum -y install passwd; yum clean all
+#RUN echo root | passwd --stdin root
+
+#RUN yum -y install openssh-server initscripts; yum clean all
 #RUN echo "UseDNS no" >> /etc/ssh/sshd_config
 #RUN sed -i 's/UsePrivilegeSeparation sandbox/UsePrivilegeSeparation no/' /etc/ssh/sshd_config
 
