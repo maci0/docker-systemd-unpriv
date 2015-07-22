@@ -10,7 +10,7 @@ RUN systemctl mask dev-mqueue.mount dev-hugepages.mount \
     systemd-remount-fs.service sys-kernel-config.mount \
     sys-kernel-debug.mount sys-fs-fuse-connections.mount
 RUN systemctl mask display-manager.service systemd-logind.service
-RUN systemctl disable graphical.target; systemctl enable multi-user.target
+RUN systemctl disable graphical.target
 
 ADD dbus.service /etc/systemd/system/dbus.service
 
