@@ -4,7 +4,7 @@ ENV container docker
 
 RUN yum -y update; yum clean all
 
-RUN yum -y swap --remove fakesystemd --install systemd systemd-libs
+RUN yum -y swap -- remove fakesystemd -- install systemd systemd-libs
 
 RUN systemctl mask dev-mqueue.mount dev-hugepages.mount \
     systemd-remount-fs.service sys-kernel-config.mount \
