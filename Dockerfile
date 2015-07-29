@@ -4,15 +4,15 @@ ENV container docker
 
 RUN yum -y update; yum clean all
 
-RUN yum -y swap -- remove fakesystemd -- install systemd systemd-libs
+RUN yum -y swap -- remove systemd-container systemd-container-libs -- install systemd systemd-libs dbus
 
 RUN systemctl mask dev-mqueue.mount dev-hugepages.mount \
     systemd-remount-fs.service sys-kernel-config.mount \
-    sys-kernel-debug.mount sys-fs-fuse-connections.mount
-RUN systemctl mask display-manager.service systemd-logind.service
-RUN systemctl disable graphical.target
+    sys-kernel-debug.mount sys-fs-fuse-connections.mount \
+    display-manager.service graphical.target systemd-logind.service
 
 ADD dbus.service /etc/systemd/system/dbus.service
+RUN systemctl enable dbus.service
 
 #RUN yum -y install passwd; yum clean all
 #RUN echo root | passwd --stdin root
