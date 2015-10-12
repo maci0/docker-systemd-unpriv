@@ -1,10 +1,8 @@
-FROM centos:centos7
+FROM fedora:22
 MAINTAINER Marcel Wysocki "maci.stgn@gmail.com"
 ENV container docker
 
 RUN yum -y update; yum clean all
-
-RUN yum -y swap -- remove systemd-container systemd-container-libs -- install systemd systemd-libs dbus
 
 RUN systemctl mask dev-mqueue.mount dev-hugepages.mount \
     systemd-remount-fs.service sys-kernel-config.mount \
